@@ -15,8 +15,6 @@ public class AjudanteController {
     private Ajudante ajudante;
     private JogadorDao jogadorDao;
 
-
-
     public void join(Player player) throws JogadorException {
         if (JOGADOR_MAP.get(player.getName()) instanceof Ajudante ajudante) {
             if (ajudante.getAmigo() == null) {
@@ -53,5 +51,11 @@ public class AjudanteController {
         } else {
             throw new JogadorException("O jogador " + nome + " não é um ajudante!!!");
         }
+    }
+
+    public static void Remove(String nome) throws JogadorException {
+            Ajudante ajudante = new Ajudante();
+            ajudante.setNome(nome);
+            new JogadorDao(ajudante).remove();
     }
 }

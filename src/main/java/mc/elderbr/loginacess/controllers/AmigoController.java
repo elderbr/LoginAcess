@@ -126,12 +126,14 @@ public class AmigoController implements JogadorInterface {
         if (JOGADOR_MAP.get(nome) instanceof Espera espera) {
             amigoDao = new AmigoDao(espera);
             amigoDao.insert();
+            EsperaController.Remove(nome);
             LISTA_ESPERA.remove(espera);
-        } else if(JOGADOR_MAP.get(nome) instanceof Ajudante ajudante) {
+        } else if (JOGADOR_MAP.get(nome) instanceof Ajudante ajudante) {
             amigoDao = new AmigoDao(ajudante);
             amigoDao.insert();
+            AjudanteController.Remove(nome);
             LISTA_AJUDANTE.remove(nome);
-        }else{
+        } else {
             throw new JogadorException("O jogador não está na lista de espera!!!");
         }
 
@@ -145,7 +147,7 @@ public class AmigoController implements JogadorInterface {
             amigoDao = new AmigoDao(amigo);
             amigoDao.remove();
         } else {
-            throw new JogadorException("O jogador "+nome+" não é um amigo!!!");
+            throw new JogadorException("O jogador " + nome + " não é um amigo!!!");
         }
 
     }
@@ -210,7 +212,7 @@ public class AmigoController implements JogadorInterface {
         amigoDao.remove();
         LISTA_AMIGO.remove(nome);
         Player amigoPlayer = Bukkit.getPlayer(amigo.getUuid());
-        if(amigoPlayer != null && amigoPlayer.isOnline()){
+        if (amigoPlayer != null && amigoPlayer.isOnline()) {
             amigoPlayer.kickPlayer("Você deixou de ser um amigo, mas ainda pode ser um ajudante!!!");
         }
     }
