@@ -139,19 +139,6 @@ public class AmigoController implements JogadorInterface {
 
     }
 
-    public void remove(Player player, String nome) throws JogadorException {
-        if (!player.isOp()) {
-            throw new JogadorException("Você não tem permissão!!!");
-        }
-        if (JOGADOR_MAP.get(nome) instanceof Amigo amigo) {
-            amigoDao = new AmigoDao(amigo);
-            amigoDao.remove();
-        } else {
-            throw new JogadorException("O jogador " + nome + " não é um amigo!!!");
-        }
-
-    }
-
     public void login(Player player, String password) throws JogadorException {
         jogador = JOGADOR_MAP.get(player.getName());
         if (jogador instanceof Amigo) {
