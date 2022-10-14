@@ -124,12 +124,14 @@ public class AmigoController implements JogadorInterface {
             throw new JogadorException("Você não tem permissão!!!");
         }
         if (JOGADOR_MAP.get(nome) instanceof Espera espera) {
-            amigoDao = new AmigoDao(espera);
+            amigo = new Amigo(espera);
+            amigoDao = new AmigoDao(amigo);
             amigoDao.insert();
             EsperaController.Remove(nome);
             LISTA_ESPERA.remove(espera);
         } else if (JOGADOR_MAP.get(nome) instanceof Ajudante ajudante) {
-            amigoDao = new AmigoDao(ajudante);
+            amigo = new Amigo(ajudante);
+            amigoDao = new AmigoDao(amigo);
             amigoDao.insert();
             AjudanteController.Remove(nome);
             LISTA_AJUDANTE.remove(nome);
