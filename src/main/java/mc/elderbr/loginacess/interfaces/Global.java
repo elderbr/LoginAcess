@@ -10,4 +10,6 @@ public interface Global {
     Plugin pluginMy = Bukkit.getServer().getPluginManager().getPlugin("LoginAcess");
     File pathConfig = pluginMy.getDataFolder().getAbsoluteFile();
 
+    String version = pluginMy.getDescription().getVersion();
+
 }
