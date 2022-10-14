@@ -34,9 +34,6 @@ public class AmigoCmdTab implements TabCompleter, Comando {
             myPlayer = player;
 
             if (myCommand.equalsIgnoreCase("addamigo")) {
-
-                Msg.Server("AddAmigo >> " + nome, getClass());
-
                 lista = new ArrayList<>();
                 for (String nomes : LISTA_ESPERA) {
                     if (args.length < 1 && !myPlayer.getName().equals(nomes)) {
