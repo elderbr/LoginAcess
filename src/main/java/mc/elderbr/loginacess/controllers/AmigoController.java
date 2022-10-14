@@ -191,16 +191,16 @@ public class AmigoController implements JogadorInterface {
         if (!player.isOp()) {
             throw new JogadorException("$cVocê não tem permissão!!!");
         }
-        if (JOGADOR_MAP.get(nome) == null) {
+        if (JOGADOR_MAP.get(nome) instanceof Amigo amigo) {
+            amigoDao = new AmigoDao(amigo);
+            amigoDao.remove();
+            LISTA_AMIGO.remove(nome);
+            Player amigoPlayer = Bukkit.getPlayer(amigo.getUuid());
+            if (amigoPlayer != null && amigoPlayer.isOnline()) {
+                amigoPlayer.kickPlayer("Você deixou de ser um amigo, mas ainda pode ser um ajudante!!!");
+            }
+        }else{
             throw new JogadorException(String.format("$cO jogador %s não existe!!!", nome));
-        }
-        amigo = new Amigo(JOGADOR_MAP.get(nome));
-        amigoDao = new AmigoDao(amigo);
-        amigoDao.remove();
-        LISTA_AMIGO.remove(nome);
-        Player amigoPlayer = Bukkit.getPlayer(amigo.getUuid());
-        if (amigoPlayer != null && amigoPlayer.isOnline()) {
-            amigoPlayer.kickPlayer("Você deixou de ser um amigo, mas ainda pode ser um ajudante!!!");
         }
     }
 }
