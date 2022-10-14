@@ -32,6 +32,8 @@ public final class LoginAcess extends JavaPlugin implements Listener {
         getCommand("login").setExecutor(new AmigoCmd());
         getCommand("addamigo").setExecutor(new AmigoCmd());
         getCommand("addamigo").setTabCompleter(new AmigoCmdTab());
+        getCommand("removeamigo").setExecutor(new AmigoCmd());
+        getCommand("removeamigo").setTabCompleter(new AmigoCmdTab());
 
         // Ajudante
         getCommand("addseguidor").setExecutor(new AjudanteCmd());

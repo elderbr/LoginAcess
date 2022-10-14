@@ -87,8 +87,9 @@ public class AmigoCmd implements CommandExecutor, Comando, JogadorInterface {
     public boolean remover() {
         if (myCommand.equals("removeamigo")) {
             try {
+                amigoController = new AmigoController();
                 amigoController.remover(myPlayer, nome);
-                Msg.PlayerAll(String.format("O jogador %s agora é mais um amigo, removido por %s!!!", nome, myPlayer.getName()));
+                Msg.PlayerAll(String.format("O jogador %s agora não é mais amigo, removido por %s!!!", nome, myPlayer.getName()));
                 return true;
             } catch (JogadorException e) {
                 Msg.Player(myPlayer, e.toString());

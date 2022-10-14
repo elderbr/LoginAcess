@@ -17,6 +17,8 @@ commands:
   addamigo:
     usage: /addamigo <nickplayer>
     description: Adiciona um novo amigo
+  removeamigo:
+    description: Remover amigo da lista
   addseguidor:
     usage: /addseguidor <nickplayer>
     description: Adiciona um seguidor

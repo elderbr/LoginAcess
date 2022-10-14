@@ -13,8 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static mc.elderbr.loginacess.interfaces.JogadorInterface.LISTA_AJUDANTE;
-import static mc.elderbr.loginacess.interfaces.JogadorInterface.LISTA_ESPERA;
+import static mc.elderbr.loginacess.interfaces.JogadorInterface.*;
 
 public class AmigoCmdTab implements TabCompleter, Comando {
     private String myCommand;
@@ -47,6 +46,15 @@ public class AmigoCmdTab implements TabCompleter, Comando {
                         lista.add(nomes);
                     } else if (nomes.contains(nome) && !myPlayer.getName().equals(nomes)) {
                         lista.add(nomes);
+                    }
+                }
+                return lista;
+            }
+            if(myCommand.equalsIgnoreCase("removeamigo")){
+                lista = new ArrayList<>();
+                for(String key : LISTA_AMIGO){
+                    if(!key.equalsIgnoreCase(player.getName())){
+                        lista.add(key);
                     }
                 }
                 return lista;
