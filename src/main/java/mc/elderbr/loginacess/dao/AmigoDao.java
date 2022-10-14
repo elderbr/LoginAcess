@@ -14,7 +14,7 @@ public class AmigoDao extends JogadorDao implements Global {
     private Amigo amigo;
 
     public AmigoDao(Jogador jogador) {
-        super(jogador);
+        super(new Amigo(jogador));
     }
 
 }
