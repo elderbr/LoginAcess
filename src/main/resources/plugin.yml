@@ -25,9 +25,5 @@ commands:
   removeseguidor:
     usage: /removeseguidor <nickplayer>
     description: Remove um seguidor da lista e espulsa do servidor
-  addstream:
-    usage: /addstream <nickplayer>
-    description: Adicionar o jogador como Stream
-  removestream:
-    usage: /removestream <nickplayer>
-    description: Remove o jogador do estatus de Stream espulsando do servidor
+  limparEspera:
+    description: Apaga todos os jogadores que estão na fila de espera

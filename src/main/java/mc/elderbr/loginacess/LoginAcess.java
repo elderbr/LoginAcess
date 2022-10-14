@@ -1,9 +1,6 @@
 package mc.elderbr.loginacess;
 
-import mc.elderbr.loginacess.commads.AjudanteCmd;
-import mc.elderbr.loginacess.commads.AjudanteCommandTab;
-import mc.elderbr.loginacess.commads.AmigoCmd;
-import mc.elderbr.loginacess.commads.AmigoCmdTab;
+import mc.elderbr.loginacess.commads.*;
 import mc.elderbr.loginacess.controllers.AjudanteController;
 import mc.elderbr.loginacess.controllers.AmigoController;
 import mc.elderbr.loginacess.controllers.EsperaController;
@@ -38,6 +35,9 @@ public final class LoginAcess extends JavaPlugin implements Listener {
         // Ajudante
         getCommand("addseguidor").setExecutor(new AjudanteCmd());
         getCommand("addseguidor").setTabCompleter(new AjudanteCommandTab());
+
+        // Espera
+        getCommand("limparespera").setExecutor(new EsperaCmd());
 
     }
 
