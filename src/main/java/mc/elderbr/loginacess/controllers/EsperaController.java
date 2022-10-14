@@ -1,6 +1,7 @@
 package mc.elderbr.loginacess.controllers;
 
 import mc.elderbr.loginacess.abstracts.Jogador;
+import mc.elderbr.loginacess.dao.AmigoDao;
 import mc.elderbr.loginacess.dao.JogadorDao;
 import mc.elderbr.loginacess.exceptions.JogadorException;
 import mc.elderbr.loginacess.interfaces.JogadorInterface;
@@ -8,6 +9,9 @@ import mc.elderbr.loginacess.model.Ajudante;
 import mc.elderbr.loginacess.model.Amigo;
 import mc.elderbr.loginacess.model.Espera;
 import mc.elderbr.loginacess.utils.Msg;
+import org.bukkit.entity.Player;
+
+import java.io.IOException;
 
 public class EsperaController implements JogadorInterface {
 
@@ -49,6 +53,15 @@ public class EsperaController implements JogadorInterface {
             Espera espera = new Espera(JOGADOR_MAP.get(nome));
             LISTA_ESPERA.remove(espera.getNome());
             new JogadorDao(espera).remove();
+        }
+    }
+
+    public void delete(Player player) throws IOException, JogadorException {
+        if(JOGADOR_MAP.get(player.getName()) instanceof Amigo){
+            JogadorDao dao = new JogadorDao(new Espera());
+            dao.delete();
+        }else{
+            throw new JogadorException("Você não tem permissão!!!");
         }
     }
 }
