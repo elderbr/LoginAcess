@@ -1,0 +1,217 @@
+package mc.elderbr.loginacess.controllers;
+
+import mc.elderbr.loginacess.abstracts.Jogador;
+import mc.elderbr.loginacess.dao.AmigoDao;
+import mc.elderbr.loginacess.dao.JogadorDao;
+import mc.elderbr.loginacess.exceptions.JogadorException;
+import mc.elderbr.loginacess.interfaces.JogadorInterface;
+import mc.elderbr.loginacess.model.Ajudante;
+import mc.elderbr.loginacess.model.Amigo;
+import mc.elderbr.loginacess.model.Espera;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
+public class AmigoController implements JogadorInterface {
+
+
+    private AmigoDao amigoDao;
+    private Ajudante ajudante;
+    private Jogador jogador;
+    private JogadorException exception;
+    private Amigo amigo;
+
+
+    public AmigoController() {
+        amigoDao = new AmigoDao(new Amigo());
+    }
+
+    public boolean insert(Jogador jogador) throws JogadorException {
+        JogadorException jogExc = new JogadorException(jogador);
+        if (jogExc.toString() == null) {
+            this.jogador = new Amigo(jogador);
+            amigoDao = new AmigoDao(this.jogador);
+            amigoDao.insert();
+        }
+        return false;
+    }
+
+    public Jogador select(String nome) throws JogadorException {
+        if (nome == null || nome.isEmpty()) {
+            throw new JogadorException("Digite o nome do jogador!!!");
+        }
+        jogador = new Amigo();
+        amigoDao = new AmigoDao(jogador);
+        jogador = amigoDao.select(nome);
+        if (jogador == null) {
+            throw new JogadorException("O jogador não existe!!!");
+        }
+        return jogador;
+    }
+
+    public static void SelectAll() {
+        new AmigoDao(new Amigo()).selectAll();
+        LISTA_AMIGO.clear();
+        for (String nome : JOGADOR_MAP.keySet()) {
+            Jogador jogador = JOGADOR_MAP.get(nome);
+            if (jogador instanceof Amigo) {
+                LISTA_AMIGO.add(nome);
+            }
+        }
+    }
+
+    public void update(Jogador jogador) throws JogadorException {
+        exception = new JogadorException(jogador);
+        if (jogador instanceof Amigo) {
+            jogador.setMove(true);
+            amigoDao = new AmigoDao(jogador);
+            if (!amigoDao.update()) {
+                throw new JogadorException("Erro ao adicionar amigo!!!");
+            }
+        }
+    }
+
+    public void join(Player player) throws JogadorException {
+        if (JOGADOR_MAP.get(player.getName()) instanceof Amigo jogador) {
+            if (jogador.getSenha() == null || jogador.getSenha().isEmpty()) {
+                throw new JogadorException("Faça o cadastro!!!");
+            }
+            if (!jogador.getIp().equals(player.getAddress().getHostName())) {
+                throw new JogadorException("Faça o login!!!");
+            }
+            // DEIXAR OPCIONAL NO CONFIG
+            jogador.setMove(true);
+            JOGADOR_MAP.put(jogador.getNome(), jogador);
+        }
+    }
+
+    public void move(Player player) throws JogadorException {
+        if (JOGADOR_MAP.get(player.getName()) instanceof Amigo amigo) {
+            if (amigo.getSenha() == null || amigo.getSenha().isEmpty()) {
+                throw new JogadorException("Faça o cadastro!!!");
+            }
+            if (!amigo.isMove()) {
+                throw new JogadorException("Faça o login!!!");
+            }
+        }
+    }
+
+    public void addAjudante(Player player, String nome) throws JogadorException {
+
+        if (nome == null || nome.isEmpty()) {
+            throw new JogadorException("Digite o nome do ajudante!!!");
+        }
+
+        if (JOGADOR_MAP.get(player.getName()) instanceof Amigo amigo) {
+            if (JOGADOR_MAP.get(nome) instanceof Espera espera) {
+                ajudante = new Ajudante(espera);
+                ajudante.setAmigo(amigo);
+                amigoDao = new AmigoDao(ajudante);
+                amigoDao.insert();
+
+                JOGADOR_MAP.put(amigo.getNome(), amigo);
+                JOGADOR_MAP.put(ajudante.getNome(), ajudante);
+                LISTA_AJUDANTE.add(ajudante.getNome());
+                LISTA_ESPERA.remove(ajudante.getNome());
+                EsperaController.Remove(ajudante.getNome());
+            }
+        } else {
+            throw new JogadorException("Você não tem permissão!!!");
+        }
+    }
+
+    public void insert(Player player, String nome) throws JogadorException {
+        if (!player.isOp()) {
+            throw new JogadorException("Você não tem permissão!!!");
+        }
+        if (JOGADOR_MAP.get(nome) instanceof Espera espera) {
+            amigoDao = new AmigoDao(espera);
+            amigoDao.insert();
+            LISTA_ESPERA.remove(espera);
+        } else if(JOGADOR_MAP.get(nome) instanceof Ajudante ajudante) {
+            amigoDao = new AmigoDao(ajudante);
+            amigoDao.insert();
+            LISTA_AJUDANTE.remove(nome);
+        }else{
+            throw new JogadorException("O jogador não está na lista de espera!!!");
+        }
+
+    }
+
+    public void remove(Player player, String nome) throws JogadorException {
+        if (!player.isOp()) {
+            throw new JogadorException("Você não tem permissão!!!");
+        }
+        if (JOGADOR_MAP.get(nome) instanceof Amigo amigo) {
+            amigoDao = new AmigoDao(amigo);
+            amigoDao.remove();
+        } else {
+            throw new JogadorException("O jogador "+nome+" não é um amigo!!!");
+        }
+
+    }
+
+    public void login(Player player, String password) throws JogadorException {
+        jogador = JOGADOR_MAP.get(player.getName());
+        if (jogador instanceof Amigo) {
+            if (jogador.getSenha().equals(password)) {
+                jogador.setIp(player);
+                amigoDao = new AmigoDao(jogador);
+                amigoDao.update();
+                jogador.setMove(true);
+                JOGADOR_MAP.put(jogador.getNome(), jogador);
+            } else {
+                throw new JogadorException("Senha invalida!!!");
+            }
+        }
+    }
+
+    public void cadastro(Player player, String[] args) throws JogadorException {
+
+        if (JOGADOR_MAP.get(player.getName()) instanceof Amigo amigo) {
+
+            if (args.length != 2) {
+                throw new JogadorException("Digite a senha e a confirmação!!!");
+            }
+
+            if (args[0] == null || args[0].isEmpty()) {
+                throw new JogadorException("Digite a senha!!!");
+            }
+
+            if (args[1] == null || args[1].isEmpty()) {
+                throw new JogadorException("Digite a confirmação da senha!!!");
+            }
+
+            if (args[0].equalsIgnoreCase(amigo.getNome())) {
+                throw new JogadorException("Senha não pode ser igual ao seu nome!!!");
+            }
+
+            if (!args[0].equals(args[1])) {
+                throw new JogadorException("Senha não confere, digite novamente!!!");
+            }
+
+            amigo.setSenha(args[0]);
+            amigo.setMove(true);
+            amigoDao = new AmigoDao(amigo);
+            if (!amigoDao.update()) {
+                throw new JogadorException("Erro ao fazer o cadastro!!!");
+            }
+        }
+    }
+
+    public void remover(Player player, String nome) throws JogadorException {
+        if (!player.isOp()) {
+            throw new JogadorException("$cVocê não tem permissão!!!");
+        }
+        if (JOGADOR_MAP.get(nome) == null) {
+            throw new JogadorException(String.format("$cO jogador %s não existe!!!", nome));
+        }
+        amigo = new Amigo(JOGADOR_MAP.get(nome));
+        amigoDao = new AmigoDao(amigo);
+        amigoDao.remove();
+        LISTA_AMIGO.remove(nome);
+        Player amigoPlayer = Bukkit.getPlayer(amigo.getUuid());
+        if(amigoPlayer != null && amigoPlayer.isOnline()){
+            amigoPlayer.kickPlayer("Você deixou de ser um amigo, mas ainda pode ser um ajudante!!!");
+        }
+    }
+}

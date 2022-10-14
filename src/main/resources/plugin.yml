@@ -1,0 +1,31 @@
+name: LoginAcess
+version: '${project.version}'
+main: mc.elderbr.loginacess.LoginAcess
+api-version: 1.19
+authors: [ ElderBR ]
+description: LoginAcess é usado para controlar o acesso ao servidor, podendo adicionar amigo, ajudantes e stream
+website: http://elderbr.com/
+commands:
+  login:
+    description: Fazer o login
+  cadastro:
+    aliases:
+      - registro
+      - cadastro
+      - register
+    description: Cadastrar jogador
+  addamigo:
+    usage: /addamigo <nickplayer>
+    description: Adiciona um novo amigo
+  addseguidor:
+    usage: /addseguidor <nickplayer>
+    description: Adiciona um seguidor
+  removeseguidor:
+    usage: /removeseguidor <nickplayer>
+    description: Remove um seguidor da lista e espulsa do servidor
+  addstream:
+    usage: /addstream <nickplayer>
+    description: Adicionar o jogador como Stream
+  removestream:
+    usage: /removestream <nickplayer>
+    description: Remove o jogador do estatus de Stream espulsando do servidor
