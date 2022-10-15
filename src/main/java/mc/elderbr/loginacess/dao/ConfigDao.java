@@ -43,6 +43,7 @@ public class ConfigDao implements Global {
         lista.add(nome);
         Collections.sort(lista);
         myConfig.set("adm", lista);
+        ADM_LISTA.add(nome);
         save();
     }
 
@@ -51,6 +52,7 @@ public class ConfigDao implements Global {
         lista.remove(nome);
         Collections.sort(lista);
         myConfig.set("adm", lista);
+        ADM_LISTA.remove(nome);
         save();
     }
 
