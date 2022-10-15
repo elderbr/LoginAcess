@@ -28,10 +28,23 @@ public class ConfigCmd implements CommandExecutor, Comando {
                 case "additem":
                     noItem();
                     break;
+                case "addadm":
+                    addAdm();
+                    break;
             }
         }
 
         return false;
+    }
+
+    private void addAdm(){
+        configController = new ConfigController();
+        try {
+            configController.addAdm(myPlayer, itemName);
+            Msg.PlayerAll("Novo adm do LoginAcess "+ itemName);
+        } catch (Exception e) {
+            Msg.Player(myPlayer, e.getMessage());
+        }
     }
 
     private void noItem() {

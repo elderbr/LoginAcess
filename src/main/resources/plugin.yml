@@ -27,5 +27,7 @@ commands:
     description: Remove um seguidor da lista e espulsa do servidor
   limparEspera:
     description: Apaga todos os jogadores que estão na fila de espera
+  addAdm:
+    description: Adicionar administrador do plugin
   addItem:
     description: Adicionar novo item na lista dos itens negados

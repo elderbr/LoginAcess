@@ -43,6 +43,9 @@ public final class LoginAcess extends JavaPlugin implements Listener {
         // Espera
         getCommand("limparespera").setExecutor(new EsperaCmd());
 
+        // Administrador
+        getCommand("addAdm").setExecutor(new ConfigCmd());
+
         // Item
         getCommand("addItem").setExecutor(new ConfigCmd());
 

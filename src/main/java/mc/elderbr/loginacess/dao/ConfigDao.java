@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ConfigDao implements Global {
@@ -20,6 +21,14 @@ public class ConfigDao implements Global {
         return myConfig.getString(command);
     }
 
+    public static void addAdm(String nome) throws IOException {
+        List<String> lista = (List<String>) myConfig.getList("adm");
+        lista.add(nome);
+        Collections.sort(lista);
+        myConfig.set("adm", lista);
+        save();
+    }
+
     public static void AddItem(String item) throws IOException {
         List<String> lista = (List<String>) myConfig.getList("notItem");
         lista.add(item);
@@ -31,6 +40,10 @@ public class ConfigDao implements Global {
         if (myConfig.getString("LoginAcess") == null) {
             myConfig.set("LoginAcess", "Controle de acesso");
             myConfig.set("Version", version);
+
+            // Administradores
+            myConfig.setComments("adm", Arrays.asList("Administradores do LoginAcess"));
+            myConfig.set("adm", Arrays.asList());
 
             // Mensagens
             myConfig.setComments("notPermission", Arrays.asList("Mensagens personalizadas para o player", "", "Sem permissão"));
