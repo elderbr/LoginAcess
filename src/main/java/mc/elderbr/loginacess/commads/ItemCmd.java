@@ -34,6 +34,8 @@ public class ItemCmd implements CommandExecutor, TabCompleter, Comando {
             switch (myCommand) {
                 case "additem":
                     return addItem();
+                case "removeitem":
+                    return remove();
             }
         }
 
@@ -75,7 +77,7 @@ public class ItemCmd implements CommandExecutor, TabCompleter, Comando {
     private boolean remove(){
         configController = new ConfigController();
         try {
-            configController.removeAdm(myPlayer, name);
+            configController.removeItem(myPlayer, name);
             Msg.Player(myPlayer, "$f$lO item $a" + name + "$r$f$l foi removido com sucesso!!!");
             return true;
         } catch (Exception e) {

@@ -16,6 +16,9 @@ public class ConfigController {
         if(nome == null || nome.isEmpty()){
             throw new Exception("Digite o nome do jogador!!!");
         }
+        if(ConfigDao.selectAdm(player)!=null){
+            throw new Exception("O jogador "+ nome  +" já é um Adm do LoginAcess!!!");
+        }
         ConfigDao.addAdm(nome);
     }
 
@@ -39,5 +42,17 @@ public class ConfigController {
         Item items = new Item();
         items.parseItemStack(item);
         ConfigDao.AddItem(item);
+    }
+
+    public void removeItem(Player player, String item) throws Exception {
+        if(ConfigDao.selectAdm(player) == null){
+            throw new Exception("Você não tem permissão!!!");
+        }
+        if(item == null || item.isEmpty()){
+            throw new Exception("Escolha um item!!!");
+        }
+        Item items = new Item();
+        items.parseItemStack(item);
+        ConfigDao.removeAdm(item);
     }
 }

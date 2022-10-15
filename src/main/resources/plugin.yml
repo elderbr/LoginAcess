@@ -33,3 +33,5 @@ commands:
     description: Remover administrador do plugin
   addItem:
     description: Adicionar novo item na lista dos itens negados
+  removeItem:
+    description: Remover item na lista dos itens negados
