@@ -87,9 +87,6 @@ public class ConfigDao implements Global {
             myConfig.setComments("limparEspera", Arrays.asList("Quando a lista de espera for limpa"));
             myConfig.set("limparEspera", "A lista de espera foi limpa!!!");
 
-            // LISTA DE ITEM QUE O SEGUIDOR NÃO PODE MEXER
-            myConfig.setComments("notItem", Arrays.asList("LISTA DE ITEM QUE O SEGUIDOR NÃO PODE MEXER"));
-            myConfig.set("notItem", Arrays.asList());
             try {
                 save();
             } catch (IOException e) {
