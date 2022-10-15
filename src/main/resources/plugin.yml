@@ -29,5 +29,7 @@ commands:
     description: Apaga todos os jogadores que estão na fila de espera
   addAdm:
     description: Adicionar administrador do plugin
+  removeAdm:
+    description: Remover administrador do plugin
   addItem:
     description: Adicionar novo item na lista dos itens negados
