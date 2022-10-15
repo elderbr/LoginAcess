@@ -1,7 +1,6 @@
 package mc.elderbr.loginacess.controllers;
 
 import mc.elderbr.loginacess.dao.ConfigDao;
-import mc.elderbr.loginacess.model.Item;
 import org.bukkit.entity.Player;
 
 public class ConfigController {

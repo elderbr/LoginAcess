@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ItemDao implements ItemInterface {
@@ -23,9 +24,10 @@ public class ItemDao implements ItemInterface {
         save();
     }
 
-    public static void remove(String item) throws IOException {
+    public static void delete(String item) {
         List<String> lista = (List<String>) myConfig.getList("notItem");
         lista.remove(item);
+        Collections.sort(lista);
         myConfig.set("notItem", lista);
         save();
     }

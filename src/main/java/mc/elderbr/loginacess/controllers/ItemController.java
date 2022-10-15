@@ -3,7 +3,6 @@ package mc.elderbr.loginacess.controllers;
 import mc.elderbr.loginacess.dao.ConfigDao;
 import mc.elderbr.loginacess.dao.ItemDao;
 import mc.elderbr.loginacess.interfaces.ItemInterface;
-import mc.elderbr.loginacess.model.Item;
 import org.bukkit.entity.Player;
 
 public class ItemController implements ItemInterface {
@@ -15,8 +14,6 @@ public class ItemController implements ItemInterface {
         if(item == null || item.isEmpty()){
             throw new Exception("Escolha um item!!!");
         }
-        Item items = new Item();
-        items.parseItemStack(item);
         ItemDao.insert(item);
     }
 
@@ -27,8 +24,9 @@ public class ItemController implements ItemInterface {
         if(item == null || item.isEmpty()){
             throw new Exception("Escolha um item!!!");
         }
-        Item items = new Item();
-        items.parseItemStack(item);
-        ItemDao.remove(item);
+        if(!ItemDao.select(item)){
+            throw new Exception("O item "+ item +" não está na lista!!!");
+        }
+        ItemDao.delete(item);
     }
 }
