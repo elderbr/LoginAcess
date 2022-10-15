@@ -1,6 +1,7 @@
 package mc.elderbr.loginacess.dao;
 
 import mc.elderbr.loginacess.interfaces.Global;
+import mc.elderbr.loginacess.utils.Msg;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -20,8 +21,13 @@ public class ConfigDao implements Global {
         return myConfig.getString(command);
     }
 
-    public static String selectAdm(Player player) {
-        return myConfig.getString("adm." + player.getName());
+    public static String selectAdm(String player) {
+        for(Object adm : myConfig.getList("adm")){
+            if(adm.equals(player)){
+                return adm.toString();
+            }
+        }
+        return null;
     }
 
     public static List<String> selectAll() {

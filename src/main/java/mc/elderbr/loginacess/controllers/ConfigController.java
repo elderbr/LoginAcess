@@ -15,7 +15,7 @@ public class ConfigController {
         if(nome == null || nome.isEmpty()){
             throw new Exception("Digite o nome do jogador!!!");
         }
-        if(ConfigDao.selectAdm(player)!=null){
+        if(ConfigDao.selectAdm(nome)!=null){
             throw new Exception("O jogador "+ nome  +" já é um Adm do LoginAcess!!!");
         }
         ConfigDao.addAdm(nome);
