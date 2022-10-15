@@ -64,7 +64,7 @@ public class ItemCmd implements CommandExecutor, TabCompleter, Comando {
         configController = new ConfigController();
         try {
             configController.addNotItem(myPlayer, name);
-            Msg.Player(myPlayer, "$3O item " + name + " adicionado com sucesso!!!");
+            Msg.Player(myPlayer, "$f$lO item $a" + name + "$r$f$l adicionado com sucesso!!!");
             return true;
         } catch (Exception e) {
             Msg.Player(myPlayer, e.getMessage());
