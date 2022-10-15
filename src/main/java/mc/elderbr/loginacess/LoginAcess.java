@@ -47,6 +47,7 @@ public final class LoginAcess extends JavaPlugin implements Listener, ItemInterf
 
         // Administrador
         getCommand("addAdm").setExecutor(new ConfigCmd());
+        getCommand("addAdm").setTabCompleter(new AdmCmdTab());
 
         // Item
         getCommand("addItem").setExecutor(new ItemCmd());
