@@ -4,10 +4,15 @@ import mc.elderbr.loginacess.commads.*;
 import mc.elderbr.loginacess.controllers.AjudanteController;
 import mc.elderbr.loginacess.controllers.AmigoController;
 import mc.elderbr.loginacess.controllers.EsperaController;
+import mc.elderbr.loginacess.dao.ConfigDao;
 import mc.elderbr.loginacess.events.JoinEvent;
 import mc.elderbr.loginacess.events.PlayerMove;
+import mc.elderbr.loginacess.model.Item;
+import mc.elderbr.loginacess.utils.Msg;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import static mc.elderbr.loginacess.interfaces.Global.ITEM_LISTA;
 
 public final class LoginAcess extends JavaPlugin implements Listener {
 
@@ -18,6 +23,12 @@ public final class LoginAcess extends JavaPlugin implements Listener {
         AmigoController.SelectAll();
         AjudanteController.SelectAll();
         EsperaController.SelectAll();
+        ConfigDao.CreateDefault();
+        Item.CreateItem();
+
+        for(String item : ITEM_LISTA){
+            Msg.Server("item >> "+ item, getClass());
+        }
 
         events();
         commands();
