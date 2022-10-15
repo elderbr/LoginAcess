@@ -26,7 +26,7 @@ public class ItemController implements ItemInterface {
         if(item == null || item.isEmpty()){
             throw new Exception("Escolha um item!!!");
         }
-        if(ItemDao.select(item)){
+        if(!ItemDao.select(item)){
             throw new Exception("O item "+ item +" não está na lista!!!");
         }
         ItemDao.delete(item);
