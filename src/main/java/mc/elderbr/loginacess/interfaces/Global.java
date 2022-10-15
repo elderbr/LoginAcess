@@ -17,6 +17,8 @@ public interface Global {
     File pathConfig = pluginMy.getDataFolder().getAbsoluteFile();
     String version = pluginMy.getDescription().getVersion();
 
+    List<String> ADM_LISTA = new ArrayList<>();
+
     List<String> ITEM_LISTA = new ArrayList<>();
     Map<String, Item> ITEM_MAP = new HashMap<>();
 
