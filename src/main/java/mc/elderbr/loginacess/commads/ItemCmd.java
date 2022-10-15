@@ -65,7 +65,7 @@ public class ItemCmd implements CommandExecutor, TabCompleter, Comando, ItemInte
         itemController = new ItemController();
         try {
             itemController.insert(myPlayer, name);
-            Msg.Player(myPlayer, "$f$lO item $a" + name + "$r$f$l adicionado com sucesso!!!");
+            Msg.PlayerAll("$f$lO item $a" + name + "$r$f$l foi adicionado como restrito!!!");
             return true;
         } catch (Exception e) {
             Msg.Player(myPlayer, e.getMessage());
@@ -77,7 +77,7 @@ public class ItemCmd implements CommandExecutor, TabCompleter, Comando, ItemInte
         itemController = new ItemController();
         try {
             itemController.delete(myPlayer, name);
-            Msg.Player(myPlayer, "$f$lO item $a" + name + "$r$f$l foi removido com sucesso!!!");
+            Msg.PlayerAll("$f$lO item $a" + name + "$r$f$l foi removido os itens restritos!!!");
             return true;
         } catch (Exception e) {
             Msg.Player(myPlayer, e.getMessage());

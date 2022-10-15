@@ -1,6 +1,5 @@
 package mc.elderbr.loginacess.controllers;
 
-import mc.elderbr.loginacess.dao.ConfigDao;
 import mc.elderbr.loginacess.dao.ItemDao;
 import mc.elderbr.loginacess.interfaces.ItemInterface;
 import org.bukkit.entity.Player;
