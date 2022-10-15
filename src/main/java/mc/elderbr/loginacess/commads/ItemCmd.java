@@ -1,7 +1,8 @@
 package mc.elderbr.loginacess.commads;
 
-import mc.elderbr.loginacess.controllers.ConfigController;
+import mc.elderbr.loginacess.controllers.ItemController;
 import mc.elderbr.loginacess.interfaces.Comando;
+import mc.elderbr.loginacess.interfaces.ItemInterface;
 import mc.elderbr.loginacess.utils.Msg;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,14 +15,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static mc.elderbr.loginacess.interfaces.Global.ITEM_LISTA;
-
-public class ItemCmd implements CommandExecutor, TabCompleter, Comando {
+public class ItemCmd implements CommandExecutor, TabCompleter, Comando, ItemInterface {
     private Player myPlayer;
     private String name;
 
     private String myCommand;
-    private ConfigController configController;
+    private ItemController itemController;
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -63,9 +62,9 @@ public class ItemCmd implements CommandExecutor, TabCompleter, Comando {
     }
 
     private boolean addItem() {
-        configController = new ConfigController();
+        itemController = new ItemController();
         try {
-            configController.addNotItem(myPlayer, name);
+            itemController.insert(myPlayer, name);
             Msg.Player(myPlayer, "$f$lO item $a" + name + "$r$f$l adicionado com sucesso!!!");
             return true;
         } catch (Exception e) {
@@ -75,9 +74,9 @@ public class ItemCmd implements CommandExecutor, TabCompleter, Comando {
     }
 
     private boolean remove(){
-        configController = new ConfigController();
+        itemController = new ItemController();
         try {
-            configController.removeItem(myPlayer, name);
+            itemController.delete(myPlayer, name);
             Msg.Player(myPlayer, "$f$lO item $a" + name + "$r$f$l foi removido com sucesso!!!");
             return true;
         } catch (Exception e) {

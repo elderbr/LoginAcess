@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -51,6 +52,11 @@ public class ItemDao implements ItemInterface {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        }
+        if(myConfig.get("notItem") == null){
+            myConfig.setComments("notItem", Arrays.asList("Item que o seguidor não pode mexer"));
+            myConfig.set("notItem", Arrays.asList());
+            save();
         }
     }
 

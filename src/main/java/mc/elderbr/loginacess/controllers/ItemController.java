@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 public class ItemController implements ItemInterface {
 
     public void insert(Player player, String item) throws Exception {
-        if(ConfigDao.selectAdm(player) == null){
+        if(!ADM_LISTA.contains(player.getName())){
             throw new Exception("Você não tem permissão!!!");
         }
         if(item == null || item.isEmpty()){
@@ -17,7 +17,7 @@ public class ItemController implements ItemInterface {
         ItemDao.insert(item);
     }
 
-    public void remove(Player player, String item) throws Exception {
+    public void delete(Player player, String item) throws Exception {
         if(ConfigDao.selectAdm(player) == null){
             throw new Exception("Você não tem permissão!!!");
         }
