@@ -8,11 +8,8 @@ import mc.elderbr.loginacess.dao.ConfigDao;
 import mc.elderbr.loginacess.events.JoinEvent;
 import mc.elderbr.loginacess.events.PlayerMove;
 import mc.elderbr.loginacess.model.Item;
-import mc.elderbr.loginacess.utils.Msg;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import static mc.elderbr.loginacess.interfaces.Global.ITEM_LISTA;
 
 public final class LoginAcess extends JavaPlugin implements Listener {
 
@@ -25,10 +22,6 @@ public final class LoginAcess extends JavaPlugin implements Listener {
         EsperaController.SelectAll();
         ConfigDao.CreateDefault();
         Item.CreateItem();
-
-        for(String item : ITEM_LISTA){
-            Msg.Server("item >> "+ item, getClass());
-        }
 
         events();
         commands();
@@ -49,6 +42,9 @@ public final class LoginAcess extends JavaPlugin implements Listener {
 
         // Espera
         getCommand("limparespera").setExecutor(new EsperaCmd());
+
+        // Item
+        getCommand("addItem").setExecutor(new ConfigCmd());
 
     }
 

@@ -1,5 +1,6 @@
 package mc.elderbr.loginacess.interfaces;
 
+import mc.elderbr.loginacess.model.Item;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
@@ -17,6 +18,6 @@ public interface Global {
     String version = pluginMy.getDescription().getVersion();
 
     List<String> ITEM_LISTA = new ArrayList<>();
-    Map<String, ItemStack> ITEM_MAP = new HashMap<>();
+    Map<String, Item> ITEM_MAP = new HashMap<>();
 
 }
