@@ -4,8 +4,6 @@ import mc.elderbr.loginacess.dao.ConfigDao;
 import mc.elderbr.loginacess.model.Item;
 import org.bukkit.entity.Player;
 
-import java.io.IOException;
-
 public class ConfigController {
 
     public ConfigController() {

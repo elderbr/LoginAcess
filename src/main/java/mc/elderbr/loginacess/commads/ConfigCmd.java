@@ -43,7 +43,7 @@ public class ConfigCmd implements CommandExecutor, Comando {
         configController = new ConfigController();
         try {
             configController.addAdm(myPlayer, name);
-            Msg.PlayerAll("Novo adm do LoginAcess "+ name);
+            Msg.PlayerAll("$bNovo adm do LoginAcess $l"+ name);
         } catch (Exception e) {
             Msg.Player(myPlayer, e.getMessage());
         }
@@ -53,7 +53,7 @@ public class ConfigCmd implements CommandExecutor, Comando {
         configController = new ConfigController();
         try {
             configController.removeAdm(myPlayer, name);
-            Msg.PlayerAll("O jogador "+ name + " deixou de ser Adm do LoginAcess!!!");
+            Msg.PlayerAll("$6O jogador "+ name + " deixou de ser Adm do LoginAcess!!!");
             return true;
         } catch (Exception e) {
             Msg.Player(myPlayer, "$c"+ e.getMessage());

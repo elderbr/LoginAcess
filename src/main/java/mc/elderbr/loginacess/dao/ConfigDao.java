@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class ConfigDao implements Global {
 
@@ -21,6 +22,18 @@ public class ConfigDao implements Global {
         return myConfig.getString(command);
     }
 
+    public static String selectAdm(String nome) {
+        return myConfig.getString("adm." + nome);
+    }
+
+    public static List<String> selectAll() {
+        ADM_LISTA.clear();
+        for (Object names : myConfig.getList("adm")) {
+            ADM_LISTA.add(names.toString());
+        }
+        return ADM_LISTA;
+    }
+
     public static void addAdm(String nome) throws IOException {
         List<String> lista = (List<String>) myConfig.getList("adm");
         lista.add(nome);
@@ -28,6 +41,7 @@ public class ConfigDao implements Global {
         myConfig.set("adm", lista);
         save();
     }
+
     public static void removeAdm(String nome) throws IOException {
         List<String> lista = (List<String>) myConfig.getList("adm");
         lista.remove(nome);
@@ -89,6 +103,7 @@ public class ConfigDao implements Global {
                 throw new RuntimeException(e);
             }
         }
+        selectAll();// Listando todos os adm
     }
 
     public static void save() throws IOException {
