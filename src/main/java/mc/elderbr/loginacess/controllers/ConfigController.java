@@ -30,7 +30,7 @@ public class ConfigController {
     }
 
     public void addNotItem(Player player, String item) throws Exception {
-        if(ConfigDao.selectAdm(player.getName()) == null){
+        if(ConfigDao.selectAdm(player) == null){
             throw new Exception("Você não tem permissão!!!");
         }
         if(item == null || item.isEmpty()){
