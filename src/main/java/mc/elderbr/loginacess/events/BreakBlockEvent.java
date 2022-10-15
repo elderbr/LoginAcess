@@ -36,18 +36,33 @@ public class BreakBlockEvent implements Listener, ItemInterface {
                 || ITEM_NotItem_LISTA.contains(blockName(left))
                 || ITEM_NotItem_LISTA.contains(blockName(right))
         ) {
-            Msg.Player(myPlayer, "Você não pode quebrar esse bloco!!!");
+            Msg.Player(myPlayer, "$c$lHum, você não pode fazer isso!");
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void placeBlock(BlockPlaceEvent event) {
+
+        myPlayer = event.getPlayer();
+
+        if(!LISTA_AJUDANTE.contains(myPlayer.getName())) return;
+
         block = event.getBlock();
         up = block.getRelative(BlockFace.UP);
         down = block.getRelative(BlockFace.DOWN);
         left = block.getRelative(BlockFace.WEST);
         right = block.getRelative(BlockFace.EAST);
+
+        if (ITEM_NotItem_LISTA.contains(blockName(block))
+                || ITEM_NotItem_LISTA.contains(blockName(up))
+                || ITEM_NotItem_LISTA.contains(blockName(down))
+                || ITEM_NotItem_LISTA.contains(blockName(left))
+                || ITEM_NotItem_LISTA.contains(blockName(right))
+        ) {
+            Msg.Player(myPlayer, "$c$lHum, você não pode fazer isso!");
+            event.setCancelled(true);
+        }
     }
 
     private String blockName(Block block) {
