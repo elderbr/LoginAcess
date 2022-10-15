@@ -29,8 +29,7 @@ public class ConfigCmd implements CommandExecutor, Comando {
                     noItem();
                     break;
                 case "addadm":
-                    addAdm();
-                    break;
+                    return addAdm();
                 case "removeadm":
                     return removeAdm();
             }
@@ -39,14 +38,16 @@ public class ConfigCmd implements CommandExecutor, Comando {
         return false;
     }
 
-    private void addAdm(){
+    private boolean addAdm(){
         configController = new ConfigController();
         try {
             configController.addAdm(myPlayer, name);
             Msg.PlayerAll("$bNovo adm do LoginAcess $l"+ name);
+            return true;
         } catch (Exception e) {
             Msg.Player(myPlayer, e.getMessage());
         }
+        return false;
     }
     
     private boolean removeAdm(){
