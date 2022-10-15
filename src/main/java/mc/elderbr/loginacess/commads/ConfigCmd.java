@@ -25,9 +25,6 @@ public class ConfigCmd implements CommandExecutor, Comando {
             name = getCommand(args).toLowerCase();
 
             switch (myCommand) {
-                case "additem":
-                    noItem();
-                    break;
                 case "addadm":
                     return addAdm();
                 case "removeadm":
@@ -60,15 +57,5 @@ public class ConfigCmd implements CommandExecutor, Comando {
             Msg.Player(myPlayer, "$c"+ e.getMessage());
         }
         return false;
-    }
-
-    private void noItem() {
-        configController = new ConfigController();
-        try {
-            configController.addNotItem(myPlayer, name);
-            Msg.Player(myPlayer, "$3O item "+ name+" adicionado com sucesso!!!");
-        } catch (Exception e) {
-            Msg.Player(myPlayer, e.getMessage());
-        }
     }
 }
