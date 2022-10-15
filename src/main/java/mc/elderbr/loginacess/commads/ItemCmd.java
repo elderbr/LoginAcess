@@ -11,7 +11,10 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static mc.elderbr.loginacess.interfaces.Global.ITEM_LISTA;
 
 public class ItemCmd implements CommandExecutor, TabCompleter, Comando {
     private Player myPlayer;
@@ -23,12 +26,12 @@ public class ItemCmd implements CommandExecutor, TabCompleter, Comando {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-        if(sender instanceof Player player){
+        if (sender instanceof Player player) {
             myPlayer = player;
             name = getCommand(args);
             myCommand = command.getName().toLowerCase();
 
-            switch (myCommand){
+            switch (myCommand) {
                 case "additem":
                     return addItem();
             }
@@ -37,12 +40,31 @@ public class ItemCmd implements CommandExecutor, TabCompleter, Comando {
         return false;
     }
 
+    @Nullable
+    @Override
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (sender instanceof Player player) {
+            myPlayer = player;
+            name = getCommand(args);
+
+            if (command.getName().equalsIgnoreCase("additem")) {
+                List<String> lista = new ArrayList<>();
+                for (String names : ITEM_LISTA) {
+                    if (names.contains(name)) {
+                        lista.add(names);
+                    }
+                }
+                return lista;
+            }
+        }
+        return null;
+    }
 
     private boolean addItem() {
         configController = new ConfigController();
         try {
             configController.addNotItem(myPlayer, name);
-            Msg.Player(myPlayer, "$3O item "+ name+" adicionado com sucesso!!!");
+            Msg.Player(myPlayer, "$3O item " + name + " adicionado com sucesso!!!");
             return true;
         } catch (Exception e) {
             Msg.Player(myPlayer, e.getMessage());
@@ -50,13 +72,5 @@ public class ItemCmd implements CommandExecutor, TabCompleter, Comando {
         return false;
     }
 
-    @Nullable
-    @Override
-    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if(sender instanceof Player player) {
-            myPlayer = player;
-            name = getCommand(args);
-        }
-        return null;
-    }
+
 }

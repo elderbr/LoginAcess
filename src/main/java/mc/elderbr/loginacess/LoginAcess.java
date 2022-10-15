@@ -48,6 +48,7 @@ public final class LoginAcess extends JavaPlugin implements Listener {
 
         // Item
         getCommand("addItem").setExecutor(new ItemCmd());
+        getCommand("addItem").setTabCompleter(new ItemCmd());
 
     }
 
