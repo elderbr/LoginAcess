@@ -57,6 +57,13 @@ public class ItemCmd implements CommandExecutor, TabCompleter, Comando, ItemInte
                 }
                 return lista;
             }
+            if (command.getName().equalsIgnoreCase("removeitem")) {
+                List<String> lista = new ArrayList<>();
+                for (String names : ITEM_NotItem_LISTA) {
+                    lista.add(names);
+                }
+                return lista;
+            }
         }
         return null;
     }
@@ -73,7 +80,7 @@ public class ItemCmd implements CommandExecutor, TabCompleter, Comando, ItemInte
         return false;
     }
 
-    private boolean remove(){
+    private boolean remove() {
         itemController = new ItemController();
         try {
             itemController.delete(myPlayer, name);
