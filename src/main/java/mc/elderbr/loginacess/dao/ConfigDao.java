@@ -1,13 +1,13 @@
 package mc.elderbr.loginacess.dao;
 
 import mc.elderbr.loginacess.interfaces.Global;
-import mc.elderbr.loginacess.utils.Msg;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class ConfigDao implements Global {
 
