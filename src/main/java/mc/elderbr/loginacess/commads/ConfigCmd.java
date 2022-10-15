@@ -22,7 +22,7 @@ public class ConfigCmd implements CommandExecutor, Comando {
         if (sender instanceof Player player) {
             myPlayer = player;
             myCommand = command.getName().toLowerCase();
-            name = getCommand(args).toLowerCase();
+            name = getCommand(args);
 
             switch (myCommand) {
                 case "addadm":
@@ -39,7 +39,7 @@ public class ConfigCmd implements CommandExecutor, Comando {
         configController = new ConfigController();
         try {
             configController.addAdm(myPlayer, name);
-            Msg.PlayerAll("$bNovo adm do LoginAcess $l"+ name);
+            Msg.PlayerAll("$fNovo adm do LoginAcess $l$e"+ name);
             return true;
         } catch (Exception e) {
             Msg.Player(myPlayer, e.getMessage());
@@ -51,7 +51,7 @@ public class ConfigCmd implements CommandExecutor, Comando {
         configController = new ConfigController();
         try {
             configController.removeAdm(myPlayer, name);
-            Msg.PlayerAll("$6O jogador "+ name + " deixou de ser Adm do LoginAcess!!!");
+            Msg.PlayerAll("$fO jogador $c"+ name + "$f deixou de ser Adm do LoginAcess!!!");
             return true;
         } catch (Exception e) {
             Msg.Player(myPlayer, "$c"+ e.getMessage());
