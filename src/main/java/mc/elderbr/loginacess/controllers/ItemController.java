@@ -18,7 +18,7 @@ public class ItemController implements ItemInterface {
     }
 
     public void delete(Player player, String item) throws Exception {
-        if(ConfigDao.selectAdm(player) == null){
+        if(!ADM_LISTA.contains(player.getName())){
             throw new Exception("Você não tem permissão!!!");
         }
         if(item == null || item.isEmpty()){
