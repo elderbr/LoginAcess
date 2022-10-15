@@ -31,28 +31,4 @@ public class ConfigController {
         }
         ConfigDao.removeAdm(nome);
     }
-
-    public void addNotItem(Player player, String item) throws Exception {
-        if(ConfigDao.selectAdm(player) == null){
-            throw new Exception("Você não tem permissão!!!");
-        }
-        if(item == null || item.isEmpty()){
-            throw new Exception("Escolha um item!!!");
-        }
-        Item items = new Item();
-        items.parseItemStack(item);
-        ConfigDao.AddItem(item);
-    }
-
-    public void removeItem(Player player, String item) throws Exception {
-        if(ConfigDao.selectAdm(player) == null){
-            throw new Exception("Você não tem permissão!!!");
-        }
-        if(item == null || item.isEmpty()){
-            throw new Exception("Escolha um item!!!");
-        }
-        Item items = new Item();
-        items.parseItemStack(item);
-        ConfigDao.removeAdm(item);
-    }
 }

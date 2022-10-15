@@ -5,6 +5,7 @@ import mc.elderbr.loginacess.controllers.AjudanteController;
 import mc.elderbr.loginacess.controllers.AmigoController;
 import mc.elderbr.loginacess.controllers.EsperaController;
 import mc.elderbr.loginacess.dao.ConfigDao;
+import mc.elderbr.loginacess.dao.ItemDao;
 import mc.elderbr.loginacess.events.JoinEvent;
 import mc.elderbr.loginacess.events.PlayerMove;
 import mc.elderbr.loginacess.model.Item;
@@ -22,6 +23,7 @@ public final class LoginAcess extends JavaPlugin implements Listener {
         EsperaController.SelectAll();
         ConfigDao.CreateDefault();
         Item.CreateItem();
+        ItemDao.selectAllNotItem();
 
         events();
         commands();
