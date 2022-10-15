@@ -6,6 +6,7 @@ import mc.elderbr.loginacess.controllers.AmigoController;
 import mc.elderbr.loginacess.controllers.EsperaController;
 import mc.elderbr.loginacess.dao.ConfigDao;
 import mc.elderbr.loginacess.dao.ItemDao;
+import mc.elderbr.loginacess.events.BreakBlockEvent;
 import mc.elderbr.loginacess.events.JoinEvent;
 import mc.elderbr.loginacess.events.PlayerMove;
 import mc.elderbr.loginacess.interfaces.ItemInterface;
@@ -60,6 +61,7 @@ public final class LoginAcess extends JavaPlugin implements Listener, ItemInterf
     private void events() {
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerMove(), this);
+        getServer().getPluginManager().registerEvents(new BreakBlockEvent(), this);
     }
 
 
