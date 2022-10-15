@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public interface JogadorInterface {
+public interface JogadorInterface extends Global{
 
     Map<String, Jogador> JOGADOR_MAP = new HashMap<>();
     List<String> LISTA_AMIGO = new ArrayList<>();

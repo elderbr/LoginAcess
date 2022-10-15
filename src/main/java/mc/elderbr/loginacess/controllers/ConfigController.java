@@ -1,9 +1,10 @@
 package mc.elderbr.loginacess.controllers;
 
 import mc.elderbr.loginacess.dao.ConfigDao;
+import mc.elderbr.loginacess.interfaces.JogadorInterface;
 import org.bukkit.entity.Player;
 
-public class ConfigController {
+public class ConfigController implements JogadorInterface {
 
     public ConfigController() {
     }
@@ -28,6 +29,6 @@ public class ConfigController {
         if(nome == null || nome.isEmpty()){
             throw new Exception("Digite o nome do jogador!!!");
         }
-        ConfigDao.removeAdm(nome);
+        ConfigDao.removeAdm(nome);        
     }
 }
