@@ -16,9 +16,19 @@ public class ConfigController {
             throw new Exception("Você não tem permissão!!!");
         }
         if(nome == null || nome.isEmpty()){
-            throw new Exception("Escolha um item!!!");
+            throw new Exception("Digite o nome do jogador!!!");
         }
         ConfigDao.addAdm(nome);
+    }
+
+    public void removeAdm(Player player, String nome) throws Exception {
+        if(!player.isOp()){
+            throw new Exception("Você não tem permissão!!!");
+        }
+        if(nome == null || nome.isEmpty()){
+            throw new Exception("Digite o nome do jogador!!!");
+        }
+        ConfigDao.removeAdm(nome);
     }
 
     public void addNotItem(Player player, String item) throws Exception {

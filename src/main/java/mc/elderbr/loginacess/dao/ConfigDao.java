@@ -28,6 +28,13 @@ public class ConfigDao implements Global {
         myConfig.set("adm", lista);
         save();
     }
+    public static void removeAdm(String nome) throws IOException {
+        List<String> lista = (List<String>) myConfig.getList("adm");
+        lista.remove(nome);
+        Collections.sort(lista);
+        myConfig.set("adm", lista);
+        save();
+    }
 
     public static void AddItem(String item) throws IOException {
         List<String> lista = (List<String>) myConfig.getList("notItem");

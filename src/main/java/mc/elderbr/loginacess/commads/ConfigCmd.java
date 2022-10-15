@@ -13,7 +13,7 @@ public class ConfigCmd implements CommandExecutor, Comando {
     private Player myPlayer;
     private String myCommand;
 
-    private String itemName;
+    private String name;
     private ConfigController configController;
 
     @Override
@@ -22,7 +22,7 @@ public class ConfigCmd implements CommandExecutor, Comando {
         if (sender instanceof Player player) {
             myPlayer = player;
             myCommand = command.getName().toLowerCase();
-            itemName = getCommand(args).toLowerCase();
+            name = getCommand(args).toLowerCase();
 
             switch (myCommand) {
                 case "additem":
@@ -31,6 +31,8 @@ public class ConfigCmd implements CommandExecutor, Comando {
                 case "addadm":
                     addAdm();
                     break;
+                case "removeadm":
+                    return removeAdm();
             }
         }
 
@@ -40,18 +42,30 @@ public class ConfigCmd implements CommandExecutor, Comando {
     private void addAdm(){
         configController = new ConfigController();
         try {
-            configController.addAdm(myPlayer, itemName);
-            Msg.PlayerAll("Novo adm do LoginAcess "+ itemName);
+            configController.addAdm(myPlayer, name);
+            Msg.PlayerAll("Novo adm do LoginAcess "+ name);
         } catch (Exception e) {
             Msg.Player(myPlayer, e.getMessage());
         }
+    }
+    
+    private boolean removeAdm(){
+        configController = new ConfigController();
+        try {
+            configController.removeAdm(myPlayer, name);
+            Msg.PlayerAll("O jogador "+ name + " deixou de ser Adm do LoginAcess!!!");
+            return true;
+        } catch (Exception e) {
+            Msg.Player(myPlayer, "$c"+ e.getMessage());
+        }
+        return false;
     }
 
     private void noItem() {
         configController = new ConfigController();
         try {
-            configController.addNotItem(myPlayer, itemName);
-            Msg.Player(myPlayer, "$3O item "+ itemName+" adicionado com sucesso!!!");
+            configController.addNotItem(myPlayer, name);
+            Msg.Player(myPlayer, "$3O item "+ name+" adicionado com sucesso!!!");
         } catch (Exception e) {
             Msg.Player(myPlayer, e.getMessage());
         }
