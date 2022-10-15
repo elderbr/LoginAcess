@@ -11,6 +11,7 @@ import java.util.Map;
 public interface ItemInterface extends Global {
 
     List<String> ITEM_LISTA = new ArrayList<>();
+    List<String> ITEM_NotItem_LISTA = new ArrayList<>();
     Map<String, ItemStack> ITEM_MAP = new HashMap<>();
 
     default String parse(ItemStack itemStack){

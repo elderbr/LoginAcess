@@ -51,7 +51,7 @@ public class ItemCmd implements CommandExecutor, TabCompleter, Comando, ItemInte
             if (command.getName().equalsIgnoreCase("additem")) {
                 List<String> lista = new ArrayList<>();
                 for (String names : ITEM_LISTA) {
-                    if (names.contains(name)) {
+                    if (names.contains(name) && !ITEM_NotItem_LISTA.contains(names)) {
                         lista.add(names);
                     }
                 }

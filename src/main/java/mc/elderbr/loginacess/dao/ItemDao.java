@@ -22,6 +22,7 @@ public class ItemDao implements ItemInterface {
         List<String> lista = (List<String>) myConfig.getList("notItem");
         lista.add(item);
         myConfig.set("notItem", lista);
+        ITEM_NotItem_LISTA.add(item);
         save();
     }
 
@@ -30,19 +31,20 @@ public class ItemDao implements ItemInterface {
         lista.remove(item);
         Collections.sort(lista);
         myConfig.set("notItem", lista);
+        ITEM_LISTA.remove(item);
         save();
     }
 
     public static boolean select(String item){
-        return (myConfig.getString("notItem."+ item)==null);
+        return myConfig.getList("notItem").contains(item);
     }
     public static List<String> selectAllNotItem(){
         create();
-        List<String> lista = new ArrayList<>();
+        ITEM_NotItem_LISTA.clear();
         for(Object key : myConfig.getList("notItem")){
-            lista.add(key.toString());
+            ITEM_NotItem_LISTA.add(key.toString());
         }
-        return lista;
+        return ITEM_NotItem_LISTA;
     }
 
     private static void create(){
