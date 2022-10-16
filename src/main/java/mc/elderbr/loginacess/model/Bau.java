@@ -7,6 +7,7 @@ import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Bau {
@@ -52,6 +53,7 @@ public class Bau {
     }
 
     public Bau addItem(){
+        listItemStack = new ArrayList<>();
         for(ItemStack itemStack : player.getInventory()){
             listItemStack.add(itemStack);
         }
