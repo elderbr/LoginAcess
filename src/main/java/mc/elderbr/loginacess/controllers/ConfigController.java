@@ -29,6 +29,6 @@ public class ConfigController implements JogadorInterface {
         if(nome == null || nome.isEmpty()){
             throw new Exception("Digite o nome do jogador!!!");
         }
-        ConfigDao.removeAdm(nome);        
+        ConfigDao.removeAdm(nome);
     }
 }
