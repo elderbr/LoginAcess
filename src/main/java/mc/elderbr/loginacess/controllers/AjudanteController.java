@@ -1,6 +1,7 @@
 package mc.elderbr.loginacess.controllers;
 
 import mc.elderbr.loginacess.abstracts.Jogador;
+import mc.elderbr.loginacess.dao.ConfigDao;
 import mc.elderbr.loginacess.dao.JogadorDao;
 import mc.elderbr.loginacess.exceptions.JogadorException;
 import mc.elderbr.loginacess.model.Ajudante;
@@ -68,6 +69,17 @@ public class AjudanteController {
                 onlinePlayer.kickPlayer("Obrigado por ajudar, espero você em breve!");
             }
         }
+    }
+    public static void RemoveAll(Player player) throws JogadorException {
+        if(ConfigDao.selectAdm(player.getName()) == null){
+            throw new JogadorException("$cVocê não tem permissão!");
+        }
 
+        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+            if(JOGADOR_MAP.get(onlinePlayer.getName()) instanceof Ajudante){
+                Remove(onlinePlayer.getName());
+                onlinePlayer.kickPlayer("Obrigado por ajudar, espero você em breve!");
+            }
+        }
     }
 }

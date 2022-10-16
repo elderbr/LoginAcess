@@ -15,8 +15,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-
 
 public class AjudanteCmd implements CommandExecutor, JogadorInterface, Comando {
 
@@ -78,7 +76,13 @@ public class AjudanteCmd implements CommandExecutor, JogadorInterface, Comando {
     }
 
     private boolean removeAll() {
-
+        try {
+            AjudanteController.RemoveAll(player);
+            Msg.PlayerAll("Todos os ajudantes foram removidos por " + player.getName() + "!");
+            return true;
+        } catch (JogadorException e) {
+            Msg.Player(player, e.toString());
+        }
         return false;
     }
 
