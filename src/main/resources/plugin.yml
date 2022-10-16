@@ -25,6 +25,8 @@ commands:
   removeseguidor:
     usage: /removeseguidor <nickplayer>
     description: Remove um seguidor da lista e espulsa do servidor
+  removeseguidorAll:
+    description: Remove todos os seguidores
   limparEspera:
     description: Apaga todos os jogadores que estão na fila de espera
   addAdm:

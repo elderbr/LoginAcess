@@ -44,7 +44,7 @@ public class AjudanteCmd implements CommandExecutor, JogadorInterface, Comando {
                     return addSeguidor();
                 case "removeseguidor":
                     return removeSeguidor();
-                case "removeall":
+                case "removeseguidorAll":
                     return removeAll();
             }
         }

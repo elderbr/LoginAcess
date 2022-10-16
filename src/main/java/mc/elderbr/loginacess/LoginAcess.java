@@ -46,6 +46,7 @@ public final class LoginAcess extends JavaPlugin implements Listener, ItemInterf
         // Ajudante
         getCommand("addseguidor").setExecutor(new AjudanteCmd());
         getCommand("addseguidor").setTabCompleter(new AjudanteCommandTab());
+        getCommand("removeseguidorAll").setExecutor(new AjudanteCmd());
 
         // Espera
         getCommand("limparespera").setExecutor(new EsperaCmd());
