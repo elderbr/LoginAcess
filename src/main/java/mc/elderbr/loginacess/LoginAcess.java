@@ -10,7 +10,10 @@ import mc.elderbr.loginacess.events.BreakBlockEvent;
 import mc.elderbr.loginacess.events.InventorioClickEvent;
 import mc.elderbr.loginacess.events.JoinEvent;
 import mc.elderbr.loginacess.events.PlayerMove;
+import mc.elderbr.loginacess.exceptions.JogadorException;
 import mc.elderbr.loginacess.interfaces.ItemInterface;
+import mc.elderbr.loginacess.model.Ajudante;
+import mc.elderbr.loginacess.utils.Msg;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -69,7 +72,12 @@ public final class LoginAcess extends JavaPlugin implements Listener, ItemInterf
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        try {
+            AjudanteController.RemoveAll();
+            Msg.PlayerAll("Todos os ajudantes foram removidos");
+        } catch (JogadorException e) {
+            Msg.PlayerAll(e.toString());
+        }
     }
 
 }

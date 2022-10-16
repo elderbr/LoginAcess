@@ -5,6 +5,7 @@ import mc.elderbr.loginacess.dao.JogadorDao;
 import mc.elderbr.loginacess.exceptions.JogadorException;
 import mc.elderbr.loginacess.model.Ajudante;
 import mc.elderbr.loginacess.model.Amigo;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import static mc.elderbr.loginacess.interfaces.JogadorInterface.JOGADOR_MAP;
@@ -57,5 +58,16 @@ public class AjudanteController {
             Ajudante ajudante = new Ajudante();
             ajudante.setNome(nome);
             new JogadorDao(ajudante).remove();
+            LISTA_AJUDANTE.remove(nome);
+    }
+
+    public static void RemoveAll() throws JogadorException {
+        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+            if(JOGADOR_MAP.get(onlinePlayer.getName()) instanceof Ajudante){
+                Remove(onlinePlayer.getName());
+                onlinePlayer.kickPlayer("Obrigado por ajudar, espero você em breve!");
+            }
+        }
+
     }
 }
