@@ -26,6 +26,10 @@ public class EsperaController implements JogadorInterface {
             jogadorDao = new JogadorDao(new Espera(jogador));
             LISTA_ESPERA.add(jogador.getNome());
             return jogadorDao.insert();
+        }else{
+            if(JOGADOR_MAP.get(jogador.getNome()) instanceof Espera ){
+                throw new JogadorException("Jogador não está na lista de amigo!");
+            }
         }
         return false;
     }
