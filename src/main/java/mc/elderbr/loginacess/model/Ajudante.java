@@ -49,4 +49,14 @@ public class Ajudante extends Jogador {
             throw new JogadorException("O ajudante "+ this.getNome() +" não tem amigo!!!");
         }
     }
+
+    @Override
+    public String toString() {
+        return "Ajudante{" +
+                "nome="+ getNome()+
+                "uuid="+ getUuid()+
+                "ip="+ getIp()+
+                "amigo=" + amigo +
+                '}';
+    }
 }
