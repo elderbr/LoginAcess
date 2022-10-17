@@ -12,21 +12,22 @@ import java.util.List;
 
 public class Bau {
 
-    private Player player;
+    private Player ajudantePlayer;
     private List<ItemStack> listItemStack;
     private Block block1, block2;
     private Chest chestLeft, chestRight;
     private org.bukkit.block.data.type.Chest chestDataLeft;
     private org.bukkit.block.data.type.Chest chestDataRight;
 
-    private Bau(){}
+    private Bau() {
+    }
 
     public Bau(Player player) {
-        this.player = player;
+        this.ajudantePlayer = player;
     }
 
     public Bau createBau() {
-        block1 = player.getLocation().getBlock();
+        block1 = ajudantePlayer.getLocation().getBlock();
         block2 = null;
 
         if (block1.getRelative(BlockFace.EAST).getType() == Material.AIR) {
@@ -35,11 +36,12 @@ public class Bau {
             block2 = block1.getRelative(BlockFace.WEST);
         }
         if (block2 == null) {
-            block2 = player.getLocation().getBlock().getRelative(BlockFace.UP);
+            block2 = block1.getRelative(BlockFace.UP);
         }
+
         block1.setType(Material.CHEST);
         chestLeft = (Chest) block1.getState();
-        chestDataLeft = (org.bukkit.block.data.type.Chest) this.chestLeft.getBlockData();
+        chestDataLeft = (org.bukkit.block.data.type.Chest) chestLeft.getBlockData();
         chestDataLeft.setType(org.bukkit.block.data.type.Chest.Type.LEFT);
 
         block2.setType(Material.CHEST);
@@ -47,30 +49,30 @@ public class Bau {
         chestDataRight = (org.bukkit.block.data.type.Chest) this.chestRight.getBlockData();
         chestDataRight.setType(org.bukkit.block.data.type.Chest.Type.RIGHT);
 
-        block1.setBlockData(chestDataLeft, false);
-        block2.setBlockData(chestDataRight, false);
+        block1.setBlockData(chestDataLeft, true);
+        block2.setBlockData(chestDataRight, true);
         return this;
     }
 
-    public Bau addItem(){
+    public Bau addItem() {
         listItemStack = new ArrayList<>();
-        for(ItemStack itemStack : player.getInventory()){
+        for (ItemStack itemStack : ajudantePlayer.getInventory()) {
             listItemStack.add(itemStack);
         }
-        for(ItemStack itemStack : player.getEnderChest()){
+        for (ItemStack itemStack : ajudantePlayer.getEnderChest()) {
             listItemStack.add(itemStack);
         }
         int position = 0;
-        for(ItemStack itemStack : listItemStack) {
-            if(position < 27) {
+        for (ItemStack itemStack : listItemStack) {
+            if (position < 27) {
                 chestLeft.getInventory().addItem(itemStack);
-            }else{
+            } else {
                 chestRight.getInventory().addItem(itemStack);
             }
             position++;
         }
-        player.getInventory().clear();
-        player.getEnderChest().clear();
+        ajudantePlayer.getInventory().clear();
+        ajudantePlayer.getEnderChest().clear();
         return this;
     }
 }
