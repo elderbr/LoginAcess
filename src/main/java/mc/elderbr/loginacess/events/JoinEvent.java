@@ -38,6 +38,8 @@ public class JoinEvent implements Listener, JogadorInterface {
             }
         } catch (JogadorException e) {
             Msg.Erro(e.getMessage(), "preLogin(AsyncPlayerPreLoginEvent event)", getClass(), e);
+            event.setKickMessage("Ops, você não está na lista de amigo, fale com o administrador!!!");
+            event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_FULL);
         }
     }
 
