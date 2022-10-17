@@ -66,6 +66,7 @@ public final class LoginAcess extends JavaPlugin implements Listener, ItemInterf
         getServer().getPluginManager().registerEvents(new BreakBlockEvent(), this);
         getServer().getPluginManager().registerEvents(new InventorioClickEvent(), this);
         getServer().getPluginManager().registerEvents(new QuitEvent(), this);
+        getServer().getPluginManager().registerEvents(new PickedItem(), this);
     }
 
 
