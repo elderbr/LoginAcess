@@ -79,6 +79,9 @@ public class AmigoController implements JogadorInterface {
             if (!jogador.getIp().equals(player.getAddress().getHostName())) {
                 throw new JogadorException("Faça o login!!!");
             }
+            if(!jogador.getUuid().equals(player.getUniqueId().toString())){
+                throw new JogadorException("Tem algo errado com sua conta faça o login!!!");
+            }
             // DEIXAR OPCIONAL NO CONFIG
             jogador.setMove(true);
             JOGADOR_MAP.put(jogador.getNome(), jogador);
