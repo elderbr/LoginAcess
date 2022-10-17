@@ -15,6 +15,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class JoinEvent implements Listener, JogadorInterface {
 
@@ -32,7 +33,7 @@ public class JoinEvent implements Listener, JogadorInterface {
     public void preLogin(AsyncPlayerPreLoginEvent event) {
         jogador = newJogador(event);
         try {
-            if(esperaController.insert(jogador)){
+            if (esperaController.insert(jogador)) {
                 event.setKickMessage("Ops, você não está na lista de amigo!!!");
                 event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_FULL);
             }
@@ -52,6 +53,12 @@ public class JoinEvent implements Listener, JogadorInterface {
         } catch (JogadorException e) {
             Msg.Erro("Erro ao verificar o jogador que entrou no servidor!!!", "joinPlayer(PlayerJoinEvent event)", getClass(), e);
             Msg.Player(player, e.toString());
+            (new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.kickPlayer("Você demorrou, tente novamente!");
+                }
+            }).runTaskLater(pluginMy, (long) (20 * 40));
         }
 
     }
