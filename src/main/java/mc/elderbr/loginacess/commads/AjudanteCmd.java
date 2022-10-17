@@ -9,6 +9,7 @@ import mc.elderbr.loginacess.interfaces.JogadorInterface;
 import mc.elderbr.loginacess.model.Ajudante;
 import mc.elderbr.loginacess.model.Amigo;
 import mc.elderbr.loginacess.utils.Msg;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -68,6 +69,10 @@ public class AjudanteCmd implements CommandExecutor, JogadorInterface, Comando {
         try {
             ajudanteController.remove(player, nome);
             Msg.Player(player, String.format("O seguidor %s foi removido com sucesso!!!", nome));
+            if(Bukkit.getPlayerExact(nome)!=null){
+                Player ajudantePlayer = Bukkit.getPlayerExact(nome);
+                ajudantePlayer.kickPlayer("Obrigado por me ajudar, esperao que você retorne logo!");
+            }
             return true;
         } catch (JogadorException e) {
             Msg.Player(player, e.getMessage());
