@@ -81,9 +81,7 @@ public class AjudanteController {
             throw new JogadorException("O ajudante " + nome + " não existe!!!");
         }
         if (JOGADOR_MAP.get(nome) instanceof Ajudante ajudante) {
-            jogadorDao = new JogadorDao(ajudante);
-            jogadorDao.remove();
-            LISTA_AJUDANTE.remove(nome);
+            Remove(nome);
         } else {
             throw new JogadorException("O jogador " + nome + " não é um ajudante!!!");
         }

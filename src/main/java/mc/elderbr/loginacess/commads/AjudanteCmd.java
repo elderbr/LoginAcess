@@ -70,7 +70,7 @@ public class AjudanteCmd implements CommandExecutor, JogadorInterface, Comando {
             Msg.Player(player, String.format("O seguidor %s foi removido com sucesso!!!", nome));
             return true;
         } catch (JogadorException e) {
-            Msg.Player(player, "Erro ao remover o seguidor!!!");
+            Msg.Player(player, e.getMessage());
         }
         return false;
     }

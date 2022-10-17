@@ -19,6 +19,7 @@ public class AmigoController implements JogadorInterface {
     private Jogador jogador;
     private JogadorException exception;
     private Amigo amigo;
+    private JogadorDao jogadorDao;
 
 
     public AmigoController() {
@@ -98,24 +99,27 @@ public class AmigoController implements JogadorInterface {
     public void addAjudante(Player player, String nome) throws JogadorException {
 
         if (nome == null || nome.isEmpty()) {
-            throw new JogadorException("Digite o nome do ajudante!!!");
+            throw new JogadorException("$cDigite o nome do ajudante!!!");
         }
 
         if (JOGADOR_MAP.get(player.getName()) instanceof Amigo amigo) {
             if (JOGADOR_MAP.get(nome) instanceof Espera espera) {
+
+                // Adicionando ajudante
                 ajudante = new Ajudante(espera);
                 ajudante.setAmigo(amigo);
-                amigoDao = new AmigoDao(ajudante);
-                amigoDao.insert();
-
-                JOGADOR_MAP.put(amigo.getNome(), amigo);
+                jogadorDao = new JogadorDao(ajudante);
+                jogadorDao.insert();
                 JOGADOR_MAP.put(ajudante.getNome(), ajudante);
+
+                // Removendo o jogador da espera
                 LISTA_AJUDANTE.add(ajudante.getNome());
-                LISTA_ESPERA.remove(ajudante.getNome());
                 EsperaController.Remove(ajudante.getNome());
+            }else {
+                throw new JogadorException("$eO jogador não está na fila de espera!");
             }
         } else {
-            throw new JogadorException("Você não tem permissão!!!");
+            throw new JogadorException("$cVocê não tem permissão!!!");
         }
     }
 
