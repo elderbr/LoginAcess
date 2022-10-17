@@ -9,7 +9,6 @@ import mc.elderbr.loginacess.dao.ItemDao;
 import mc.elderbr.loginacess.events.*;
 import mc.elderbr.loginacess.exceptions.JogadorException;
 import mc.elderbr.loginacess.interfaces.ItemInterface;
-import mc.elderbr.loginacess.model.Ajudante;
 import mc.elderbr.loginacess.utils.Msg;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
