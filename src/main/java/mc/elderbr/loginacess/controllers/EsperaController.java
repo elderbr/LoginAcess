@@ -1,21 +1,16 @@
 package mc.elderbr.loginacess.controllers;
 
 import mc.elderbr.loginacess.abstracts.Jogador;
-import mc.elderbr.loginacess.dao.AmigoDao;
 import mc.elderbr.loginacess.dao.JogadorDao;
 import mc.elderbr.loginacess.exceptions.JogadorException;
 import mc.elderbr.loginacess.interfaces.JogadorInterface;
-import mc.elderbr.loginacess.model.Ajudante;
 import mc.elderbr.loginacess.model.Amigo;
 import mc.elderbr.loginacess.model.Espera;
-import mc.elderbr.loginacess.utils.Msg;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
 
 public class EsperaController implements JogadorInterface {
-
-    private Jogador jogador;
     private JogadorDao jogadorDao;
 
     public EsperaController() {
