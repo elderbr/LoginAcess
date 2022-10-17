@@ -105,16 +105,21 @@ public class AmigoController implements JogadorInterface {
         if (JOGADOR_MAP.get(player.getName()) instanceof Amigo amigo) {
             if (JOGADOR_MAP.get(nome) instanceof Espera espera) {
 
+
+
                 // Adicionando ajudante
                 ajudante = new Ajudante(espera);
                 ajudante.setAmigo(amigo);
+
+                // Removendo o jogador da espera
+                EsperaController.Remove(ajudante.getNome());
+
+                LISTA_AJUDANTE.add(ajudante.getNome());
                 jogadorDao = new JogadorDao(ajudante);
                 jogadorDao.insert();
                 JOGADOR_MAP.put(ajudante.getNome(), ajudante);
 
-                // Removendo o jogador da espera
-                LISTA_AJUDANTE.add(ajudante.getNome());
-                EsperaController.Remove(ajudante.getNome());
+
             }else {
                 throw new JogadorException("$eO jogador não está na fila de espera!");
             }
