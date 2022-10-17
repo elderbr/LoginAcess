@@ -27,8 +27,7 @@ public class EsperaController implements JogadorInterface {
         if(jogador == null){
             throw new JogadorException("Erro ao adicionar o jogador na fila de espera!!!");
         }
-        this.jogador = JOGADOR_MAP.get(jogador.getNome());
-        if(this.jogador == null || !(this.jogador instanceof Amigo) && !(this.jogador instanceof Ajudante)){
+        if(JOGADOR_MAP.get(jogador.getNome()) == null){
             jogadorDao = new JogadorDao(new Espera(jogador));
             LISTA_ESPERA.add(jogador.getNome());
             return jogadorDao.insert();
