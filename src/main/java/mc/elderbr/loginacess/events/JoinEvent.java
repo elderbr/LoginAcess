@@ -37,7 +37,7 @@ public class JoinEvent implements Listener, JogadorInterface {
                 event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_FULL);
             }
         } catch (JogadorException e) {
-            Msg.Erro("Erro ao adicionar novo jogador na espera!!!", "preLogin(AsyncPlayerPreLoginEvent event)", getClass(), e);
+            Msg.Erro(e.getMessage(), "preLogin(AsyncPlayerPreLoginEvent event)", getClass(), e);
         }
     }
 
