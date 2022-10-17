@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
 public class InventorioClickEvent  implements Listener, JogadorInterface, ItemInterface {
@@ -21,8 +22,7 @@ public class InventorioClickEvent  implements Listener, JogadorInterface, ItemIn
         if(!LISTA_AJUDANTE.contains(player.getName())) return;
 
         ItemStack itemClick = event.getCurrentItem();
-
-        if(event.getClickedInventory().getType() != InventoryType.PLAYER) {
+        if(event.getClickedInventory().getType() == event.getView().getTopInventory().getType()) {
             if (ITEM_NotItem_LISTA.contains(parse(itemClick))) {
                 event.setCancelled(true);
                 player.closeInventory();
